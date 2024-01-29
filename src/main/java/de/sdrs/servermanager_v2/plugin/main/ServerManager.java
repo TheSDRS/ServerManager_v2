@@ -1,13 +1,15 @@
-package de.sdrs.servermanager_v2;
+package de.sdrs.servermanager_v2.plugin.main;
 
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import de.sdrs.servermanager_v2.api.SMAPI;
 
 public final class ServerManager extends JavaPlugin {
 
+    public static ServerManager plugin;
     @Override
     public void onEnable() {
-        this.getServer().getConsoleSender().sendMessage("lol");
+        plugin = this;
+        plugin.getServer().getConsoleSender().sendMessage(SMAPI.prefix);
     }
 
     @Override
