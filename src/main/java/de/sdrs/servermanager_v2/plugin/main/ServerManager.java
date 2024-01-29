@@ -10,11 +10,18 @@ public final class ServerManager extends JavaPlugin {
     public void onEnable() {
         plugin = this;
         SMAPI.register(this);
-        plugin.getServer().getConsoleSender().sendMessage(SMAPI.prefix);
     }
 
     @Override
     public void onDisable() {
         SMAPI.unregister(this);
+    }
+
+    public static String getDir() {
+        if (!plugin.getDataFolder().exists()) {
+            plugin.getDataFolder().mkdir();
+        }
+
+        return plugin.getDataFolder().getPath();
     }
 }

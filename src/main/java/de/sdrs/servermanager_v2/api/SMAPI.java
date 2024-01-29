@@ -6,9 +6,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class SMAPI extends JavaPlugin {
     public static String prefix = ChatColor.GOLD + "[" + ChatColor.AQUA +"ServerManager" + ChatColor.GOLD + "]: ";
+    public static Boolean isCoreRegistered = false;
 
     public static boolean register(Plugin plugin) {
         if (plugin.isEnabled() && plugin.isNaggable()) {
+            if (plugin.getName() == "servermanager_v2") {
+                plugin.getServer().getConsoleSender().sendMessage(prefix + "registered Core Plugin");
+                isCoreRegistered = true;
+                return true;
+            }
             plugin.getServer().getConsoleSender().sendMessage(prefix + ChatColor.GREEN + plugin.getName() + " was successfully registered");
             return true;
         } else {
