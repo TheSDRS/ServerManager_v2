@@ -1,6 +1,6 @@
 name: ServerManager_v2
 version: '${project.version}'
-main: de.sdrs.servermanager_v2.ServerManager
+main: de.sdrs.servermanager_v2.plugin.main.ServerManager
 api-version: '1.20'
 load: STARTUP
 authors: [SDRS]

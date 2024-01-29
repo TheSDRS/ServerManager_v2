@@ -9,11 +9,12 @@ public final class ServerManager extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
+        SMAPI.register(this);
         plugin.getServer().getConsoleSender().sendMessage(SMAPI.prefix);
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        SMAPI.unregister(this);
     }
 }
