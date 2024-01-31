@@ -1,33 +1,59 @@
 package de.sdrs.servermanager_v2.api;
 
-import org.bukkit.ChatColor;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
+import org.yaml.snakeyaml.DumperOptions;
+import org.yaml.snakeyaml.Yaml;
 
-public class SMAPI extends JavaPlugin {
-    public static String prefix = ChatColor.GOLD + "[" + ChatColor.AQUA +"ServerManager" + ChatColor.GOLD + "]: ";
-    public static Boolean isCoreRegistered = false;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
-    public static boolean register(Plugin plugin) {
-        if (plugin.isEnabled() && plugin.isNaggable()) {
-            if (plugin.getName() == "servermanager_v2") {
-                plugin.getServer().getConsoleSender().sendMessage(prefix + "registered Core Plugin");
-                isCoreRegistered = true;
-                return true;
-            }
-            plugin.getServer().getConsoleSender().sendMessage(prefix + ChatColor.GREEN + plugin.getName() + " was successfully registered");
-            return true;
+public final class SMAPI implements ServerManagerAPI {
+
+    private static List<Plugin> registeredPlugins = new ArrayList<>();
+    public static void register(Plugin plugin) {
+        if (registeredPlugins == null) {
+            registeredPlugins.add(plugin);
         } else {
-            return false;
+            if (!registeredPlugins.contains(plugin) || registeredPlugins == null) {
+                registeredPlugins.add(plugin);
+            } else {
+                return;
+            }
         }
     }
 
-    public static boolean unregister(Plugin plugin) {
-        if (plugin.isEnabled() && plugin.isNaggable()) {
-            plugin.getServer().getConsoleSender().sendMessage(prefix + ChatColor.RED + plugin.getName() + " was successfully unregistered");
-            return true;
-        } else {
-            return false;
+    @Override
+    public void writeToYAML(String path, HashMap<Object, Object> data) {
+        DumperOptions options = new DumperOptions();
+
+        options.setIndent(2);
+        options.setPrettyFlow(true);
+        options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
+
+        PrintWriter writer = null;
+        try {
+            writer = new PrintWriter(new File(path));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
+        Yaml yaml2 = new Yaml(options);
+        yaml2.dump(data, writer);
+    }
+
+    @Override
+    public HashMap<Object, Object> readFromYAML(String path) {
+        InputStream inputStream = null;
+        try {
+            inputStream = new FileInputStream(new File(path));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        Yaml yaml = new Yaml();
+        HashMap<Object, Object> data = yaml.load(inputStream);
+
+        return data;
     }
 }
