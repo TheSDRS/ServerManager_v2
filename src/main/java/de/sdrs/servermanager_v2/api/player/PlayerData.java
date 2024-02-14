@@ -1,13 +1,15 @@
-package de.sdrs.servermanager_v2.player;
+package de.sdrs.servermanager_v2.api.player;
 
 import de.sdrs.servermanager_v2.api.SMAPI;
+import de.sdrs.servermanager_v2.api.messages.PlayerMessage;
 import de.sdrs.servermanager_v2.plugin.main.ServerManager;
+import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerJoinEvent;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Objects;
 
 public class PlayerData implements PlayerActions {
 
@@ -17,17 +19,16 @@ public class PlayerData implements PlayerActions {
 
     public PlayerData(Player player) {
         SMAPI smapi = new SMAPI();
-        HashMap<Object, Object> tmpData = smapi.readFromYAML(ServerManager.getDir() + "/players.yml");
+        data = smapi.readFromYAML(ServerManager.getDir() + "/players.yml");
         playerID = player.getUniqueId().toString();
-        if (tmpData == null || !tmpData.containsKey(playerID)) {
+        if (data == null || !data.containsKey(playerID)) {
             createPlayer(player);
         } else {
-            playerData = (HashMap<Object, Object>) tmpData.get(playerID);
+            playerData = (HashMap<Object, Object>) data.get(playerID);
         }
     }
 
     private void createPlayer(Player player) {
-        HashMap<Object, Object> pData = new HashMap<>();
         HashMap<Object,Object> location = new HashMap<>();
 
         location.put("world", player.getWorld().getName());
@@ -37,40 +38,39 @@ public class PlayerData implements PlayerActions {
         location.put("yaw", player.getLocation().getYaw());
         location.put("pitch", player.getLocation().getPitch());
 
-        pData.put("name", player.getName());
-        pData.put("location", location);
+        playerData.put("name", player.getName());
+        playerData.put("location", location);
 
-        data.put(playerID, pData);
+        data.put(playerID, playerData);
 
-        savePlayerData();
+        save();
     }
 
     public void add(Object key,Object value) {
         playerData.put(key, value);
         data.replace(playerID, playerData);
-        savePlayerData();
-    }
-
-    public static List<String> get() {
-        List<String> tmp = new ArrayList<>();
-        for (Object key : data.keySet()) {
-            tmp.add((String) data.get(key));
-        }
-        for (Object key : data.keySet()) {
-            tmp.add((String) playerData.get(key));
-        }
-        return tmp;
+        save();
     }
     @Override
-    public void savePlayerData() {
+    public void save() {
         SMAPI smapi = new SMAPI();
         smapi.writeToYAML(ServerManager.getDir() + "/players.yml", data);
     }
 
     @Override
     public void saveLocation() {
-        playerData.replace("location", Bukkit.getPlayer((String) playerData.get("name")).getLocation());
+        playerData.replace("location", Objects.requireNonNull(Bukkit.getPlayer((String) playerData.get("name"))).getLocation());
         data.replace(playerID, playerData);
-        savePlayerData();
+        save();
+    }
+
+    @Override
+    public void print() {
+        Bukkit.getConsoleSender().sendMessage(String.valueOf(playerData));
+    }
+
+    @Override
+    public void playerJoined(PlayerJoinEvent e) {
+        e.setJoinMessage(PlaceholderAPI.setPlaceholders(e.getPlayer(), SMAPI.message().PlayerMSG(PlayerMessage.Join)));
     }
 }

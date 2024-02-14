@@ -1,17 +1,26 @@
 package de.sdrs.servermanager_v2.plugin.main;
 
 import de.sdrs.servermanager_v2.api.SMAPI;
+import de.sdrs.servermanager_v2.plugin.eventListeners.JoinListener;
+import org.bukkit.Bukkit;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class ServerManager extends JavaPlugin {
+public final class ServerManager extends JavaPlugin implements Listener {
 
     public static ServerManager plugin;
     @Override
     public void onEnable() {
         plugin = this;
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            Bukkit.getPluginManager().registerEvents(plugin, plugin);
+        } else {
+            SMAPI.message().MissingPlugin(Bukkit.getPluginManager().getPlugin("PlaceholderAPI"));
+        }
         SMAPI.register(this);
-        this.saveResource("players.yml", false);
-        this.getCommand("test").setExecutor(new testCMD());
+        SMAPI.createFiles();
+        plugin.getCommand("test").setExecutor(new testCMD());
+        Bukkit.getServer().getPluginManager().registerEvents(new JoinListener(), plugin);
     }
 
     @Override
@@ -24,4 +33,6 @@ public final class ServerManager extends JavaPlugin {
         }
         return plugin.getDataFolder().getPath();
     }
+
+    public static ServerManager getPlugin() {return plugin;}
 }
