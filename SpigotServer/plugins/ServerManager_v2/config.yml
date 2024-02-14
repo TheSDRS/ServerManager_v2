@@ -1,4 +1,0 @@
-messages:
-  JoinMessage: "§b%player_name% §ahas joined the game"
-  LeaveMessage: "§b%player_name% §cleft the game"
-  DeathMessage: "§b%player_name% §cdied!"
