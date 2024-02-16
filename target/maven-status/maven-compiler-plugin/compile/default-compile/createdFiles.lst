@@ -5,6 +5,7 @@ de\sdrs\servermanager_v2\plugin\main\test2CMD.class
 de\sdrs\servermanager_v2\plugin\main\testCMD.class
 de\sdrs\servermanager_v2\api\player\PlayerData.class
 de\sdrs\servermanager_v2\api\messages\error\ErrorHandling.class
+de\sdrs\servermanager_v2\api\permissions\PermissionType.class
 de\sdrs\servermanager_v2\api\messages\PlayerMessage.class
 de\sdrs\servermanager_v2\api\messages\Message.class
 de\sdrs\servermanager_v2\api\util\Config.class
@@ -12,5 +13,6 @@ de\sdrs\servermanager_v2\plugin\main\ServerManager.class
 de\sdrs\servermanager_v2\api\ServerManagerAPI.class
 de\sdrs\servermanager_v2\plugin\eventListeners\JoinListener.class
 de\sdrs\servermanager_v2\api\messages\error\Error.class
+de\sdrs\servermanager_v2\api\permissions\Permission.class
 de\sdrs\servermanager_v2\api\SMAPI.class
 de\sdrs\servermanager_v2\api\util\ConfigData.class

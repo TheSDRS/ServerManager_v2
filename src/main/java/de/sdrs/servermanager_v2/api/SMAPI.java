@@ -2,10 +2,12 @@ package de.sdrs.servermanager_v2.api;
 
 import de.sdrs.servermanager_v2.api.messages.Message;
 import de.sdrs.servermanager_v2.api.messages.Messages;
+import de.sdrs.servermanager_v2.api.permissions.Permission;
 import de.sdrs.servermanager_v2.api.util.Config;
 import de.sdrs.servermanager_v2.plugin.main.ServerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.Plugin;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
@@ -78,4 +80,8 @@ public final class SMAPI implements ServerManagerAPI {
     public static Message message() {return new Messages();}
 
     public static Config config() {return new Config();}
+
+    public static void createCommand(String name, CommandExecutor executor, Permission permission) {
+        ServerManager.getPlugin().getCommand(name).setExecutor(executor);
+    }
 }

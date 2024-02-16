@@ -10,11 +10,6 @@ import org.bukkit.entity.Player;
 public class test2CMD implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
-            PlayerActions playerActions = new PlayerData(player);
-            playerActions.removePermission("servermanager.test");
-        }
         return true;
     }
 }

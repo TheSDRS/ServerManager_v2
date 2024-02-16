@@ -1,6 +1,8 @@
 package de.sdrs.servermanager_v2.plugin.main;
 
 import de.sdrs.servermanager_v2.api.SMAPI;
+import de.sdrs.servermanager_v2.api.permissions.Permission;
+import de.sdrs.servermanager_v2.api.permissions.PermissionType;
 import de.sdrs.servermanager_v2.plugin.eventListeners.JoinListener;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
@@ -19,8 +21,11 @@ public final class ServerManager extends JavaPlugin implements Listener {
         }
         SMAPI.register(this);
         SMAPI.createFiles();
-        plugin.getCommand("test").setExecutor(new testCMD());
-        plugin.getCommand("test2").setExecutor(new test2CMD());
+        SMAPI.createCommand("test", new testCMD(), new Permission(PermissionType.COMMAND, "test"));
+        SMAPI.createCommand("test2", new test2CMD(), new Permission(PermissionType.COMMAND, "test2"));
+        //plugin.getCommand("test").setExecutor(new testCMD());
+        //plugin.getCommand("test2").setExecutor(new test2CMD());
+        SMAPI.message().debug(String.valueOf(Permission.getAllRegistered()));
         Bukkit.getServer().getPluginManager().registerEvents(new JoinListener(), plugin);
     }
 

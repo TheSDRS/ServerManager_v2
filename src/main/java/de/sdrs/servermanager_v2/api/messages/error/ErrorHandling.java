@@ -1,6 +1,8 @@
 package de.sdrs.servermanager_v2.api.messages.error;
 
 import de.sdrs.servermanager_v2.api.SMAPI;
+import de.sdrs.servermanager_v2.api.permissions.PermissionType;
+import de.sdrs.servermanager_v2.plugin.main.ServerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -23,7 +25,7 @@ public class ErrorHandling implements Error {
 
     @Override
     public Error PlayerNotFound(String playerName) {
-        Bukkit.getConsoleSender().sendMessage(SMAPI.prefix + ChatColor.RED + playerName + "was not found");
+        Bukkit.getConsoleSender().sendMessage(SMAPI.prefix + ChatColor.RED + playerName + " was not found");
         return null;
     }
 
@@ -40,8 +42,8 @@ public class ErrorHandling implements Error {
     }
 
     @Override
-    public Error Generic(String... msg) {
-        Bukkit.getConsoleSender().sendMessage(SMAPI.prefix + ChatColor.RED + Arrays.toString(msg));
+    public Error Generic(String msg) {
+        Bukkit.getConsoleSender().sendMessage(SMAPI.prefix + ChatColor.RED + msg);
         return null;
     }
 
@@ -66,6 +68,12 @@ public class ErrorHandling implements Error {
     @Override
     public Error WarpExists(Player player) {
         player.sendMessage(ChatColor.RED + "That warp already exists!");
+        return null;
+    }
+
+    @Override
+    public Error permissionTypeNotFound(PermissionType type) {
+        Bukkit.getServer().getConsoleSender().sendMessage(  SMAPI.prefix + ChatColor.RED + "PermissionType " + type + " was not found!");
         return null;
     }
 }

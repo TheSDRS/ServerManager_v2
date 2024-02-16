@@ -18,9 +18,9 @@ public class Permissions {
     public static HashMap<UUID, PermissionAttachment> perms = new HashMap<UUID, PermissionAttachment>();
     private static PermissionAttachment attachment;
 
-    public static Permission create(String permission) {
+    public static String create(String permission) {
         Bukkit.getPluginManager().addPermission(new Permission(permission));
-        return Bukkit.getPluginManager().getPermission(permission);
+        return permission;
     }
 
     private static void addAttachment(Player player) {
