@@ -8,4 +8,6 @@ public interface Message {
     public void Error(Error error);
     public String PlayerMSG(PlayerMessage msg);
     public void MissingPlugin(Plugin plugin);
+    public void debug(String msg);
+    public void info(String msg);
 }

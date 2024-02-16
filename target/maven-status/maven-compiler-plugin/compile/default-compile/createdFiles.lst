@@ -1,6 +1,7 @@
 de\sdrs\servermanager_v2\api\messages\Messages.class
 de\sdrs\servermanager_v2\api\player\PlayerActions.class
 de\sdrs\servermanager_v2\api\permissions\Permissions.class
+de\sdrs\servermanager_v2\plugin\main\test2CMD.class
 de\sdrs\servermanager_v2\plugin\main\testCMD.class
 de\sdrs\servermanager_v2\api\player\PlayerData.class
 de\sdrs\servermanager_v2\api\messages\error\ErrorHandling.class
