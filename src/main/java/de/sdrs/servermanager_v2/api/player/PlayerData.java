@@ -65,13 +65,13 @@ public class PlayerData implements PlayerActions {
     @Override
     public void save() {
         SMAPI smapi = new SMAPI();
+        data.replace(playerID, playerData);
         smapi.writeToYAML(ServerManager.getDir() + "/players.yml", data);
     }
 
     @Override
     public void saveLocation() {
         playerData.replace("location", location());
-        data.replace(playerID, playerData);
         save();
     }
 

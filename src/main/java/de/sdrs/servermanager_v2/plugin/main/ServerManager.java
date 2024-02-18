@@ -23,8 +23,6 @@ public final class ServerManager extends JavaPlugin implements Listener {
         SMAPI.createFiles();
         SMAPI.createCommand("test", new testCMD(), new Permission(PermissionType.COMMAND, "test"));
         SMAPI.createCommand("test2", new test2CMD(), new Permission(PermissionType.COMMAND, "test2"));
-        //plugin.getCommand("test").setExecutor(new testCMD());
-        //plugin.getCommand("test2").setExecutor(new test2CMD());
         SMAPI.message().debug(String.valueOf(Permission.getAllRegistered()));
         Bukkit.getServer().getPluginManager().registerEvents(new JoinListener(), plugin);
     }
