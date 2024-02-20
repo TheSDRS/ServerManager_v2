@@ -30,11 +30,6 @@ public class Role implements PlayerRole {
     }
 
     @Override
-    public String Name() {
-        return (String) role.get("name");
-    }
-
-    @Override
     public List<String> getPermissions() {
         return permissions;
     }
@@ -52,5 +47,16 @@ public class Role implements PlayerRole {
     public void addPermission(String permission) {
         permissions.add(permission);
         role.replace("permissions", permissions);
+    }
+
+    @Override
+    public void setPrefix(String prefix) {
+        role.replace("prefix", prefix);
+        save();
+    }
+
+    @Override
+    public String getPrefix() {
+        return (String) role.get("prefix");
     }
 }
