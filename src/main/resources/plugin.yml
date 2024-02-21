@@ -7,7 +7,14 @@ authors: [SDRS]
 softdepend:
   - PlaceholderAPI
 commands:
-  test:
-
-  test2:
-
+  servermanager:
+    description: gives some help
+    usage: /servermanager
+    aliases:
+      - sm
+  player:
+    description: some useful commands to edit players
+    usage: /player {playerName}
+  role:
+    description: some useful role commands
+    usage: /role

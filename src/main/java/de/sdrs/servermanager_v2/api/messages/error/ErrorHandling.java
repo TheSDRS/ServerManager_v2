@@ -76,4 +76,28 @@ public class ErrorHandling implements Error {
         Bukkit.getServer().getConsoleSender().sendMessage(  SMAPI.prefix + ChatColor.RED + "PermissionType " + type + " was not found!");
         return null;
     }
+
+    @Override
+    public Error missingPermission(String permission, CommandSender sender) {
+        sender.sendMessage(ChatColor.RED + "you need following permission to do that: " + permission);
+        return null;
+    }
+
+    @Override
+    public Error PermissionNotFound(CommandSender sender, String permission) {
+        sender.sendMessage(ChatColor.RED + "target player already hasn't the permission " + permission);
+        return null;
+    }
+
+    @Override
+    public Error RoleNotFound(CommandSender sender, String roleName) {
+        sender.sendMessage(ChatColor.RED + "The role " + roleName + " was not found");
+        return null;
+    }
+
+    @Override
+    public Error RoleAlreadyExists(CommandSender sender, String roleName) {
+        sender.sendMessage(ChatColor.RED + "The role " + roleName + " already exists");
+        return null;
+    }
 }

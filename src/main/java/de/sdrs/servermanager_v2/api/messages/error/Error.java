@@ -16,4 +16,8 @@ public interface Error {
     public Error NotWarpOwner(Player player);
     public Error WarpExists(Player player);
     public Error permissionTypeNotFound(PermissionType type);
+    public Error missingPermission(String permission, CommandSender sender);
+    public Error PermissionNotFound(CommandSender sender, String permission);
+    public Error RoleNotFound(CommandSender sender, String roleName);
+    public Error RoleAlreadyExists(CommandSender sender, String roleName);
 }

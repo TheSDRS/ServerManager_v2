@@ -17,4 +17,9 @@ public interface PlayerActions {
     public void removePermission(String permission);
     public List<Object> getPermissions();
     public HashMap<Object, Object> getSavedLocation();
+    public void setRole(String roleName);
+    public String getRole();
+    public void setListName(String prefix, String suffix);
+    public String getPrefix();
+    public String getSuffix();
 }

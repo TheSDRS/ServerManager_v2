@@ -3,6 +3,7 @@ package de.sdrs.servermanager_v2.api;
 import de.sdrs.servermanager_v2.api.messages.Message;
 import de.sdrs.servermanager_v2.api.messages.Messages;
 import de.sdrs.servermanager_v2.api.permissions.Permission;
+import de.sdrs.servermanager_v2.api.roles.Roles;
 import de.sdrs.servermanager_v2.api.util.Config;
 import de.sdrs.servermanager_v2.plugin.main.ServerManager;
 import org.bukkit.Bukkit;
@@ -37,15 +38,21 @@ public final class SMAPI implements ServerManagerAPI {
 
     public static void createFiles() {
         String path = ServerManager.getDir();
-        ServerManager.getPlugin().saveResource("players.yml", false);
+
         ServerManager.getPlugin().saveResource("config.yml", false);
+        ServerManager.getPlugin().saveResource("players.yml", false);
         ServerManager.getPlugin().saveResource("roles.yml", false);
         ServerManager.getPlugin().saveResource("warps.yml", false);
         ServerManager.getPlugin().saveResource("worlds.yml", false);
     }
 
+    public static void runChecks() {
+        Roles.checkFiles();
+    }
+
     @Override
     public void writeToYAML(String path, HashMap<Object, Object> data) {
+        message().debug(path);
         DumperOptions options = new DumperOptions();
 
         options.setIndent(2);

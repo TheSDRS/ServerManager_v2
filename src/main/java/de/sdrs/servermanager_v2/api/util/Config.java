@@ -26,6 +26,8 @@ public class Config {
             return msgs.get("LeaveMessage");
         } else if (data == ConfigData.DeathMSG) {
             return msgs.get("DeathMessage");
+        } else if (data == ConfigData.DefaultRole) {
+            return cfg.get("defaultRole");
         }
         return null;
     }
