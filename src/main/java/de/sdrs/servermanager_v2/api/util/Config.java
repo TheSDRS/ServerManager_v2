@@ -28,6 +28,10 @@ public class Config {
             return msgs.get("DeathMessage");
         } else if (data == ConfigData.DefaultRole) {
             return cfg.get("defaultRole");
+        } else if (data == ConfigData.DefaultWorld) {
+            return cfg.get("defaultWorld");
+        } else if (data == ConfigData.loadAllWorlds) {
+            return (boolean) cfg.get("loadAllWorlds");
         }
         return null;
     }

@@ -3,3 +3,5 @@ messages:
   LeaveMessage: "§b%player_name% §cleft the game"
   DeathMessage: "§b%player_name% §cdied!"
 defaultRole: player
+defaultWorld: world
+loadAllWorlds: true

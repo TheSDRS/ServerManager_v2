@@ -20,4 +20,6 @@ public interface Error {
     public Error PermissionNotFound(CommandSender sender, String permission);
     public Error RoleNotFound(CommandSender sender, String roleName);
     public Error RoleAlreadyExists(CommandSender sender, String roleName);
+    public Error WorldAlreadyExists(CommandSender sender, String worldName);
+    public Error WorldNotFound(CommandSender sender, String worldName);
 }

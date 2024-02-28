@@ -5,6 +5,7 @@ import de.sdrs.servermanager_v2.api.ServerManagerAPI;
 import de.sdrs.servermanager_v2.api.permissions.Permissions;
 import de.sdrs.servermanager_v2.api.player.PlayerActions;
 import de.sdrs.servermanager_v2.api.player.PlayerData;
+import de.sdrs.servermanager_v2.api.player.Players;
 import de.sdrs.servermanager_v2.plugin.main.ServerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -38,7 +39,7 @@ public class Role implements PlayerRole {
         ServerManagerAPI smapi = new SMAPI();
         ID = roleName.toLowerCase();
         roles = smapi.readFromYAML(ServerManager.getDir() + "/roles.yml");
-        role = (HashMap<Object, Object>) roles.get(roleName.toLowerCase());
+        role = (HashMap<Object, Object>) roles.get(ID);
         permissions = (List<String>) role.get("permissions");
         color = (String) role.get("color");
     }
@@ -86,16 +87,11 @@ public class Role implements PlayerRole {
 
     @Override
     public void removePermission(String permission) {
-        SMAPI smapi = new SMAPI();
-        HashMap<Object, Object> data = smapi.readFromYAML(ServerManager.getDir() + "/players.yml");
         permissions.remove(permission);
         role.replace("permissions", permissions);
-        for (Object key : data.keySet()) {
-            HashMap<Object, Object> pData = (HashMap<Object, Object>) data.get(key);
-            if (pData.get("role").equals(ID)) {
-                unloadPermissions(Bukkit.getPlayer(UUID.fromString((String) key)));
-                loadPermissions(Bukkit.getPlayer(UUID.fromString((String) key)));
-            }
+        for (Player p : Players.getAll()) {
+            PlayerActions playerActions = new PlayerData(p);
+            playerActions.removePermission(permission);
         }
         save();
     }
@@ -154,5 +150,17 @@ public class Role implements PlayerRole {
         for (String perm : permissions) {
             Permissions.removePermission(p, perm);
         }
+    }
+
+    @Override
+    public List<Player> getPlayers() {
+        List<Player> playerList = new ArrayList<>();
+        for (Player p : Players.getAll()) {
+            PlayerActions playerActions = new PlayerData(p);
+            if (playerActions.getRole().equals(ID)) {
+                playerList.add(p);
+            }
+        }
+        return playerList;
     }
 }

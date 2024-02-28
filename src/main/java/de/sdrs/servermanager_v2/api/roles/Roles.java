@@ -55,6 +55,16 @@ public class Roles {
         smapi.writeToYAML(ServerManager.getDir() + "/roles.yml", roles);
     }
 
+    public static void removeRole(String name) {
+        SMAPI smapi = new SMAPI();
+
+        HashMap<Object, Object> roles = smapi.readFromYAML(ServerManager.getDir() + "/roles.yml");
+
+        roles.remove(name.toLowerCase());
+
+        smapi.writeToYAML(ServerManager.getDir() + "/roles.yml", roles);
+    }
+
     public static void checkFiles() {
         SMAPI smapi = new SMAPI();
         if (smapi.readFromYAML(ServerManager.getDir() + "/roles.yml") == null) {

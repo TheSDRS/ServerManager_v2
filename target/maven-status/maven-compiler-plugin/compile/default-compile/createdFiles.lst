@@ -5,6 +5,7 @@ de\sdrs\servermanager_v2\api\permissions\PermissionType.class
 de\sdrs\servermanager_v2\plugin\eventListeners\PostLoadListener.class
 de\sdrs\servermanager_v2\plugin\commandExecutor\smCMD.class
 de\sdrs\servermanager_v2\api\util\Config.class
+de\sdrs\servermanager_v2\plugin\commandExecutor\worldCMD.class
 de\sdrs\servermanager_v2\api\ServerManagerAPI.class
 de\sdrs\servermanager_v2\plugin\eventListeners\JoinListener.class
 de\sdrs\servermanager_v2\api\messages\error\Error.class
@@ -15,12 +16,15 @@ de\sdrs\servermanager_v2\api\roles\Role.class
 de\sdrs\servermanager_v2\api\util\ConfigData.class
 de\sdrs\servermanager_v2\api\world\SmapiWorld.class
 de\sdrs\servermanager_v2\plugin\commandExecutor\playerCMD.class
+de\sdrs\servermanager_v2\api\world\SmapiWorld$1.class
 de\sdrs\servermanager_v2\api\world\SmapiWorlds.class
 de\sdrs\servermanager_v2\api\player\PlayerData.class
+de\sdrs\servermanager_v2\api\player\Players.class
 de\sdrs\servermanager_v2\api\messages\error\ErrorHandling.class
 de\sdrs\servermanager_v2\api\messages\PlayerMessage.class
 de\sdrs\servermanager_v2\api\messages\Message.class
 de\sdrs\servermanager_v2\plugin\main\ServerManager.class
+de\sdrs\servermanager_v2\api\util\File.class
 de\sdrs\servermanager_v2\api\permissions\Permission.class
 de\sdrs\servermanager_v2\api\roles\PlayerRole.class
 de\sdrs\servermanager_v2\plugin\main\Enable.class

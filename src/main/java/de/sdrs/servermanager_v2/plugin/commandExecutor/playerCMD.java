@@ -11,9 +11,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
-public class playerCMD implements CommandExecutor {
+import java.util.ArrayList;
+import java.util.List;
+
+public class playerCMD implements CommandExecutor, TabCompleter {
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender.hasPermission("servermanager.command.player")) {
@@ -68,5 +73,77 @@ public class playerCMD implements CommandExecutor {
             SMAPI.message().Error(new ErrorHandling().missingPermission("servermanager.command.player", sender));
         }
         return true;
+    }
+
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
+        List<String> arguments1 = new ArrayList<>();
+
+        if (arguments1.isEmpty()) {
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                arguments1.add(player.getName());
+            }
+        }
+
+        List<String> results1 = new ArrayList<>();
+
+        if (args.length == 1) {
+            for (String a : arguments1) {
+                if (a.toLowerCase().startsWith(args[0].toLowerCase())) {
+                    results1.add(a);
+                }
+            }
+            return results1;
+        }
+
+        List<String> arguments2 = new ArrayList<>();
+
+        if (arguments2.isEmpty()) {
+            arguments2.add("addPermission");
+            arguments2.add("removePermission");
+            arguments2.add("setRole");
+        }
+
+        List<String> results2 = new ArrayList<>();
+
+        if (args.length == 2) {
+            for (String a : arguments2) {
+                if (a.toLowerCase().startsWith(args[1].toLowerCase())) {
+                    results2.add(a);
+                }
+            }
+            return results2;
+        }
+
+        List<String> arguments3 = new ArrayList<>();
+
+        if (arguments3.isEmpty()) {
+            if (Bukkit.getOnlinePlayers().contains(Bukkit.getPlayer(args[0]))) {
+                PlayerActions playerActions = new PlayerData(Bukkit.getPlayer(args[0]));
+                if (args[1].equalsIgnoreCase("removePermission")) {
+                    for (Object perm : playerActions.getPermissions()) {
+                        arguments3.add((String) perm);
+                    }
+                } else if (args[1].equalsIgnoreCase("setRole")) {
+                    for (Object key : Roles.getAll().keySet()) {
+                        arguments3.add((String) key);
+                    }
+                }
+            }
+        }
+
+        List<String> results3 = new ArrayList<>();
+
+        if (args.length == 3) {
+            for (String a : arguments3) {
+                if (a.toLowerCase().startsWith(args[2].toLowerCase())) {
+                    results3.add(a);
+                }
+            }
+            return results3;
+        }
+
+        return null;
     }
 }

@@ -4,5 +4,7 @@ public enum ConfigData {
     JoinMSG,
     LeaveMSG,
     DeathMSG,
-    DefaultRole
+    DefaultRole,
+    DefaultWorld,
+    loadAllWorlds
 }

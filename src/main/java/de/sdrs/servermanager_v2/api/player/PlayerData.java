@@ -147,7 +147,7 @@ public class PlayerData implements PlayerActions {
         Role role = new Role(roleName, currentPlayer);
         role.loadPermissions();
         role.showPrefix();
-        playerData.replace("role", roleName);
+        playerData.replace("role", roleName.toLowerCase());
         save();
     }
 

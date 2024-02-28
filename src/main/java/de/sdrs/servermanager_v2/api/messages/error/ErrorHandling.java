@@ -100,4 +100,16 @@ public class ErrorHandling implements Error {
         sender.sendMessage(ChatColor.RED + "The role " + roleName + " already exists");
         return null;
     }
+
+    @Override
+    public Error WorldAlreadyExists(CommandSender sender, String worldName) {
+        sender.sendMessage(ChatColor.RED + "The world " + worldName + " already exists");
+        return null;
+    }
+
+    @Override
+    public Error WorldNotFound(CommandSender sender, String worldName) {
+        sender.sendMessage(ChatColor.RED + "The world " + worldName + " wasn't found");
+        return null;
+    }
 }
