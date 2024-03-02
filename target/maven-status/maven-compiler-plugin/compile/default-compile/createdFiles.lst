@@ -4,6 +4,7 @@ de\sdrs\servermanager_v2\api\permissions\Permissions.class
 de\sdrs\servermanager_v2\api\permissions\PermissionType.class
 de\sdrs\servermanager_v2\plugin\eventListeners\PostLoadListener.class
 de\sdrs\servermanager_v2\plugin\commandExecutor\smCMD.class
+de\sdrs\servermanager_v2\api\warps\Warp.class
 de\sdrs\servermanager_v2\api\util\Config.class
 de\sdrs\servermanager_v2\plugin\commandExecutor\worldCMD.class
 de\sdrs\servermanager_v2\api\ServerManagerAPI.class
@@ -21,6 +22,7 @@ de\sdrs\servermanager_v2\api\world\SmapiWorlds.class
 de\sdrs\servermanager_v2\api\player\PlayerData.class
 de\sdrs\servermanager_v2\api\player\Players.class
 de\sdrs\servermanager_v2\api\messages\error\ErrorHandling.class
+de\sdrs\servermanager_v2\api\warps\Warps.class
 de\sdrs\servermanager_v2\api\messages\PlayerMessage.class
 de\sdrs\servermanager_v2\api\messages\Message.class
 de\sdrs\servermanager_v2\plugin\main\ServerManager.class
