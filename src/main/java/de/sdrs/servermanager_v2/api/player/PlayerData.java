@@ -6,6 +6,7 @@ import de.sdrs.servermanager_v2.api.permissions.Permissions;
 import de.sdrs.servermanager_v2.api.roles.Role;
 import de.sdrs.servermanager_v2.api.roles.Roles;
 import de.sdrs.servermanager_v2.api.util.ConfigData;
+import de.sdrs.servermanager_v2.api.warps.Warp;
 import de.sdrs.servermanager_v2.plugin.main.ServerManager;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
@@ -169,5 +170,16 @@ public class PlayerData implements PlayerActions {
     @Override
     public String getSuffix() {
         return playerSuffix;
+    }
+
+    @Override
+    public void warpPlayer(Warp warp) {
+        currentPlayer.teleport(warp.getLocation());
+    }
+
+    @Override
+    public void warpPlayer(String warp) {
+        Warp targetWarp = new Warp(warp);
+        currentPlayer.teleport(targetWarp.getLocation());
     }
 }

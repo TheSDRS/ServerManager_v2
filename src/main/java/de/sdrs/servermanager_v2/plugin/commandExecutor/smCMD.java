@@ -2,6 +2,8 @@ package de.sdrs.servermanager_v2.plugin.commandExecutor;
 
 import de.sdrs.servermanager_v2.api.SMAPI;
 import de.sdrs.servermanager_v2.api.messages.error.ErrorHandling;
+import de.sdrs.servermanager_v2.api.player.PlayerActions;
+import de.sdrs.servermanager_v2.api.player.PlayerData;
 import de.sdrs.servermanager_v2.api.world.SmapiWorld;
 import de.sdrs.servermanager_v2.api.world.SmapiWorlds;
 import org.bukkit.Bukkit;
@@ -17,12 +19,8 @@ public class smCMD implements CommandExecutor {
         if (sender.hasPermission("servermanager.command.servermanager")) {
             if (args.length == 1) {
                 if (args[0].equals("test")) {
-                    SmapiWorlds.loadCustomWorld("Lobby");
-                } else if (args[0].equalsIgnoreCase("test2")) {
-                    SmapiWorlds.loadCustomWorld("Lobby");
-                } else if (args[0].equalsIgnoreCase("send")) {
-                    Player player = (Player) sender;
-                    player.teleport(Bukkit.getWorld("Lobby").getSpawnLocation());
+                    PlayerActions playerActions = new PlayerData((Player) sender);
+                    playerActions.warpPlayer("testWarp");
                 }
             } else {
                 sender.sendMessage(ChatColor.GOLD + "For help type [/help] documentation:" + ChatColor.UNDERLINE + " https://github.com/TheSDRS/ServerManager_v2/wiki");

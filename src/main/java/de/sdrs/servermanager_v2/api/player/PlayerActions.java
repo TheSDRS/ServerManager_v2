@@ -1,5 +1,6 @@
 package de.sdrs.servermanager_v2.api.player;
 
+import de.sdrs.servermanager_v2.api.warps.Warp;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.HashMap;
@@ -22,4 +23,6 @@ public interface PlayerActions {
     public void setListName(String prefix, String suffix);
     public String getPrefix();
     public String getSuffix();
+    public void warpPlayer(Warp warp);
+    public void warpPlayer(String warp);
 }

@@ -72,6 +72,12 @@ public class ErrorHandling implements Error {
     }
 
     @Override
+    public Error NoWarpsFound() {
+        Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "No warps were found");
+        return null;
+    }
+
+    @Override
     public Error permissionTypeNotFound(PermissionType type) {
         Bukkit.getServer().getConsoleSender().sendMessage(  SMAPI.prefix + ChatColor.RED + "PermissionType " + type + " was not found!");
         return null;

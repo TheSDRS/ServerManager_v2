@@ -15,6 +15,7 @@ public interface Error {
     public Error TargetWorldUnavailable(CommandSender sender);
     public Error NotWarpOwner(Player player);
     public Error WarpExists(Player player);
+    public Error NoWarpsFound();
     public Error permissionTypeNotFound(PermissionType type);
     public Error missingPermission(String permission, CommandSender sender);
     public Error PermissionNotFound(CommandSender sender, String permission);
