@@ -1,7 +1,6 @@
 package de.sdrs.servermanager_v2.plugin.main;
 
 import de.sdrs.servermanager_v2.api.SMAPI;
-import de.sdrs.servermanager_v2.api.warps.Warp;
 import de.sdrs.servermanager_v2.plugin.eventListeners.JoinListener;
 import de.sdrs.servermanager_v2.plugin.eventListeners.PostLoadListener;
 import org.bukkit.Bukkit;

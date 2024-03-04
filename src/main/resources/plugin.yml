@@ -21,3 +21,6 @@ commands:
   world:
     description: some useful world tools
     usage: /world {args}
+  warp:
+    description: some useful warp tools
+    usage: /warp {args}

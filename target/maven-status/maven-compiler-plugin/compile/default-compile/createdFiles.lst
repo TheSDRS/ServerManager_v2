@@ -4,6 +4,7 @@ de\sdrs\servermanager_v2\api\permissions\Permissions.class
 de\sdrs\servermanager_v2\api\permissions\PermissionType.class
 de\sdrs\servermanager_v2\plugin\eventListeners\PostLoadListener.class
 de\sdrs\servermanager_v2\plugin\commandExecutor\smCMD.class
+de\sdrs\servermanager_v2\plugin\commandExecutor\warpCMD.class
 de\sdrs\servermanager_v2\api\warps\Warp.class
 de\sdrs\servermanager_v2\api\util\Config.class
 de\sdrs\servermanager_v2\plugin\commandExecutor\worldCMD.class

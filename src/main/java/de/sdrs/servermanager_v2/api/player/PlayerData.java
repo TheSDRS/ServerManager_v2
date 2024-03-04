@@ -4,20 +4,16 @@ import de.sdrs.servermanager_v2.api.SMAPI;
 import de.sdrs.servermanager_v2.api.messages.PlayerMessage;
 import de.sdrs.servermanager_v2.api.permissions.Permissions;
 import de.sdrs.servermanager_v2.api.roles.Role;
-import de.sdrs.servermanager_v2.api.roles.Roles;
 import de.sdrs.servermanager_v2.api.util.ConfigData;
 import de.sdrs.servermanager_v2.api.warps.Warp;
 import de.sdrs.servermanager_v2.plugin.main.ServerManager;
 import me.clip.placeholderapi.PlaceholderAPI;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.permissions.Permission;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 public class PlayerData implements PlayerActions {
 
@@ -175,11 +171,15 @@ public class PlayerData implements PlayerActions {
     @Override
     public void warpPlayer(Warp warp) {
         currentPlayer.teleport(warp.getLocation());
+        warp.setVisits(warp.getVisits() + 1);
+        warp.save();
     }
 
     @Override
     public void warpPlayer(String warp) {
         Warp targetWarp = new Warp(warp);
         currentPlayer.teleport(targetWarp.getLocation());
+        targetWarp.setVisits(targetWarp.getVisits() + 1);
+        targetWarp.save();
     }
 }
