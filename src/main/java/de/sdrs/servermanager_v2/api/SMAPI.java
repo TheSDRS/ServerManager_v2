@@ -3,7 +3,6 @@ package de.sdrs.servermanager_v2.api;
 import de.sdrs.servermanager_v2.api.messages.Message;
 import de.sdrs.servermanager_v2.api.messages.Messages;
 import de.sdrs.servermanager_v2.api.permissions.Permission;
-import de.sdrs.servermanager_v2.api.permissions.Permissions;
 import de.sdrs.servermanager_v2.api.roles.Roles;
 import de.sdrs.servermanager_v2.api.util.Config;
 import de.sdrs.servermanager_v2.plugin.main.ServerManager;

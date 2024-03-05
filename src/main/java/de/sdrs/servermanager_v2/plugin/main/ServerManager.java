@@ -16,7 +16,7 @@ public final class ServerManager extends JavaPlugin implements Listener {
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             Bukkit.getPluginManager().registerEvents(plugin, plugin);
         } else {
-            SMAPI.message().MissingPlugin(Bukkit.getPluginManager().getPlugin("PlaceholderAPI"));
+            SMAPI.message().MissingPlugin("PlaceholderAPI");
         }
         SMAPI.register(this);
         SMAPI.createFiles();

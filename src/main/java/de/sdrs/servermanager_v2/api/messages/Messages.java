@@ -29,8 +29,8 @@ public class Messages implements Message, Listener {
     }
 
     @Override
-    public void MissingPlugin(Plugin plugin) {
-        Bukkit.getServer().getConsoleSender().sendMessage(SMAPI.prefix + ChatColor.RED + plugin.getName() + " is missing! It is required!");
+    public void MissingPlugin(String message) {
+        Bukkit.getServer().getConsoleSender().sendMessage(SMAPI.prefix + ChatColor.RED + message + " is missing! It is required!");
     }
 
     @Override
