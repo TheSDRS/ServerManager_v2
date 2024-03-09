@@ -1,3 +1,4 @@
+de\sdrs\servermanager_v2\api\util\MessagingLevel.class
 de\sdrs\servermanager_v2\api\messages\Messages.class
 de\sdrs\servermanager_v2\api\player\PlayerActions.class
 de\sdrs\servermanager_v2\api\permissions\Permissions.class
@@ -11,6 +12,7 @@ de\sdrs\servermanager_v2\plugin\commandExecutor\worldCMD.class
 de\sdrs\servermanager_v2\api\ServerManagerAPI.class
 de\sdrs\servermanager_v2\plugin\eventListeners\JoinListener.class
 de\sdrs\servermanager_v2\api\messages\error\Error.class
+de\sdrs\servermanager_v2\plugin\commandExecutor\warpCMD$1.class
 de\sdrs\servermanager_v2\api\roles\Roles.class
 de\sdrs\servermanager_v2\api\SMAPI.class
 de\sdrs\servermanager_v2\plugin\commandExecutor\roleCMD.class

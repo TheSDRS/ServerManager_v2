@@ -3,6 +3,7 @@ package de.sdrs.servermanager_v2.api.messages;
 import de.sdrs.servermanager_v2.api.SMAPI;
 import de.sdrs.servermanager_v2.api.messages.error.Error;
 import de.sdrs.servermanager_v2.api.util.ConfigData;
+import de.sdrs.servermanager_v2.api.util.MessagingLevel;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.Listener;
@@ -35,11 +36,15 @@ public class Messages implements Message, Listener {
 
     @Override
     public void debug(String msg) {
-        Bukkit.getServer().getConsoleSender().sendMessage(SMAPI.prefix + ChatColor.GRAY + "DEBUG " + ChatColor.WHITE + msg);
+        if (SMAPI.config().getFromCFG(ConfigData.messagingLevel) == MessagingLevel.DEBUG) {
+            Bukkit.getServer().getConsoleSender().sendMessage(SMAPI.prefix + ChatColor.GRAY + "DEBUG " + ChatColor.WHITE + msg);
+        }
     }
 
     @Override
     public void info(String msg) {
-        Bukkit.getServer().getConsoleSender().sendMessage(SMAPI.prefix + ChatColor.GRAY + "INFO " + ChatColor.WHITE + msg);
+        if (SMAPI.config().getFromCFG(ConfigData.messagingLevel) == MessagingLevel.INFO || SMAPI.config().getFromCFG(ConfigData.messagingLevel) == MessagingLevel.NORMAL) {
+            Bukkit.getServer().getConsoleSender().sendMessage(SMAPI.prefix + ChatColor.GRAY + "INFO " + ChatColor.WHITE + msg);
+        }
     }
 }

@@ -14,7 +14,6 @@ public class PostLoadListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPostLoad(ServerLoadEvent event) {
         SmapiWorlds.createDefaultWorlds();
-        Warp warp = new Warp("testWarp");
         if ((boolean) SMAPI.config().getFromCFG(ConfigData.loadAllWorlds)) {
             SmapiWorlds.loadAll();
         } else {

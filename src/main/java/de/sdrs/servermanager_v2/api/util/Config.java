@@ -32,6 +32,10 @@ public class Config {
             return cfg.get("defaultWorld");
         } else if (data == ConfigData.loadAllWorlds) {
             return (boolean) cfg.get("loadAllWorlds");
+        } else if (data == ConfigData.maxWarpListLength) {
+            return (int) cfg.get("maxWarpListLength");
+        } else if (data == ConfigData.messagingLevel) {
+            return MessagingLevel.valueOf((String) cfg.get("messagingLevel"));
         }
         return null;
     }

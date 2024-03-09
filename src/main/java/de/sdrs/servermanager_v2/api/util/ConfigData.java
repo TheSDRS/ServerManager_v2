@@ -6,5 +6,7 @@ public enum ConfigData {
     DeathMSG,
     DefaultRole,
     DefaultWorld,
-    loadAllWorlds
+    loadAllWorlds,
+    maxWarpListLength,
+    messagingLevel
 }
