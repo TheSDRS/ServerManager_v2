@@ -22,4 +22,5 @@ public interface PlayerRole {
     public void unloadPermissions();
     public void unloadPermissions(Player p);
     public  List<Player> getPlayers();
+    public String getID();
 }

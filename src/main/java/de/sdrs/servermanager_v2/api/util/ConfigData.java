@@ -8,5 +8,6 @@ public enum ConfigData {
     DefaultWorld,
     loadAllWorlds,
     maxWarpListLength,
-    messagingLevel
+    messagingLevel,
+    reservedWarps
 }

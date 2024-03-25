@@ -12,6 +12,6 @@ public class Enable {
         SMAPI.createCommand("player", new playerCMD(), new Permission(PermissionType.COMMAND, "player"), new playerCMD());
         SMAPI.createCommand("role", new roleCMD(), new Permission(PermissionType.COMMAND, "role"), new roleCMD());
         SMAPI.createCommand("world", new worldCMD(), new Permission(PermissionType.COMMAND, "world"));
-        SMAPI.createCommand("warp", new warpCMD(), new Permission(PermissionType.COMMAND, "warp"));
+        SMAPI.createCommand("warp", new warpCMD(), new Permission(PermissionType.COMMAND, "warp"), new warpCMD());
     }
 }

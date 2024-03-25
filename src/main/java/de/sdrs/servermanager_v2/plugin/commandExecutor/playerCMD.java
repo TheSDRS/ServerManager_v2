@@ -6,6 +6,7 @@ import de.sdrs.servermanager_v2.api.player.PlayerActions;
 import de.sdrs.servermanager_v2.api.player.PlayerData;
 import de.sdrs.servermanager_v2.api.roles.Role;
 import de.sdrs.servermanager_v2.api.roles.Roles;
+import de.sdrs.servermanager_v2.api.util.trees.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -78,7 +79,19 @@ public class playerCMD implements CommandExecutor, TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
-        List<String> arguments1 = new ArrayList<>();
+
+        Tree tree = new TabTree("playerTabTree");
+        tree.addCompletionObjectAsBranch(CompletionObject.Player);
+        for (Branch branch : tree.getBranchesWithCO(CompletionObject.Player)) {
+            branch.addBranch(new TabBranch("addPermission")).condition(Bukkit.getOnlinePlayers().contains(Bukkit.getPlayer(args[0])));
+            branch.addBranch(new TabBranch("removePermission")).condition(Bukkit.getOnlinePlayers().contains(Bukkit.getPlayer(args[0])));
+            branch.addBranch(new TabBranch("setRole")).condition(Bukkit.getOnlinePlayers().contains(Bukkit.getPlayer(args[0])));
+
+            branch.getBranch("addPermission").addCompletionObjectAsLeaf(CompletionObject.Permission);
+            branch.getBranch("removePermission").addCompletionObjectAsLeaf(CompletionObject.Permission);
+            branch.getBranch("setRole").addCompletionObjectAsLeaf(CompletionObject.Role);
+        }
+        /*List<String> arguments1 = new ArrayList<>();
 
         if (arguments1.isEmpty()) {
             for (Player player : Bukkit.getOnlinePlayers()) {
@@ -142,8 +155,8 @@ public class playerCMD implements CommandExecutor, TabCompleter {
                 }
             }
             return results3;
-        }
+        }*/
 
-        return null;
+        return tree.complete(sender, command, label, args);
     }
 }

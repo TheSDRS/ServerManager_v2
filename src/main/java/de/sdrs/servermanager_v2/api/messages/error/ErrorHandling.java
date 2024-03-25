@@ -43,7 +43,7 @@ public class ErrorHandling implements Error {
 
     @Override
     public Error Generic(String msg) {
-        Bukkit.getConsoleSender().sendMessage(SMAPI.prefix + ChatColor.RED + msg);
+        Bukkit.getConsoleSender().sendMessage(SMAPI.prefix + ChatColor.RED + "ERROR " + msg);
         return null;
     }
 

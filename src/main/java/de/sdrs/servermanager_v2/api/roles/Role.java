@@ -163,4 +163,9 @@ public class Role implements PlayerRole {
         }
         return playerList;
     }
+
+    @Override
+    public String getID() {
+        return ID;
+    }
 }

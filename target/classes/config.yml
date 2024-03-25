@@ -7,3 +7,7 @@ defaultWorld: world
 loadAllWorlds: true
 maxWarpListLength: 20
 messagingLevel: DEBUG
+reservedWarpNames:
+  - "create"
+  - "top"
+  - "list"

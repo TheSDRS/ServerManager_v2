@@ -4,6 +4,7 @@ import de.sdrs.servermanager_v2.api.SMAPI;
 import de.sdrs.servermanager_v2.plugin.main.ServerManager;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class Config {
 
@@ -36,6 +37,8 @@ public class Config {
             return (int) cfg.get("maxWarpListLength");
         } else if (data == ConfigData.messagingLevel) {
             return MessagingLevel.valueOf((String) cfg.get("messagingLevel"));
+        } else if (data == ConfigData.reservedWarps) {
+            return (List<String>) cfg.get("reservedWarpNames");
         }
         return null;
     }

@@ -10,13 +10,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
 import java.util.*;
 import java.util.Comparator;
 import java.util.List;
 
-public class warpCMD implements CommandExecutor {
+public class warpCMD implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender.hasPermission("servermanager.command.warp")) {
@@ -25,11 +26,14 @@ public class warpCMD implements CommandExecutor {
                     if (sender instanceof Player) {
                         Player player = (Player) sender;
                         if (args.length == 2) {
-                            if (!Warps.getWarpObjects().containsKey(args[1])) {
+                            List<String> reservedWarps = (List<String>) SMAPI.config().getFromCFG(ConfigData.reservedWarps);
+                            if (!Warps.getWarpObjects().containsKey(args[1]) && !reservedWarps.contains(args[1])) {
                                 Warp warp = new Warp(args[1]);
                                 warp.setOwner(player.getName());
                                 warp.setLocation(player.getLocation());
                                 warp.save();
+
+                                sender.sendMessage(ChatColor.GREEN + "Created Warp " + ChatColor.GOLD + warp.getName());
                             } else {
                                 SMAPI.message().Error(new ErrorHandling().WarpExists(player));
                             }
@@ -56,6 +60,8 @@ public class warpCMD implements CommandExecutor {
                             sender.sendMessage(ChatColor.GOLD + "  Pitch: " + warp.getLocation().getPitch());
                         } else if (args[1].equalsIgnoreCase("delete")) {
                             if (sender.getName().equals(warp.getOwner()) || sender.getName().equals("CONSOLE")) {
+                                sender.sendMessage(ChatColor.RED + "Deleted warp " + ChatColor.GRAY + warp.getName());
+
                                 warp.delete();
                             } else {
                                 SMAPI.message().Error(new ErrorHandling().NotWarpOwner((Player) sender));
@@ -65,6 +71,8 @@ public class warpCMD implements CommandExecutor {
                                 Player player = (Player) sender;
                                 if (player.getName().equals(warp.getOwner())) {
                                     warp.setLocation(player.getLocation());
+
+                                    sender.sendMessage(ChatColor.GREEN + "Successfully set new location of " + ChatColor.GOLD + warp.getName());
                                 } else {
                                     SMAPI.message().Error(new ErrorHandling().NotWarpOwner(player));
                                 }
@@ -80,6 +88,8 @@ public class warpCMD implements CommandExecutor {
                             player.teleport(warp.getLocation());
                             warp.setVisits(warp.getVisits() + 1);
                             warp.save();
+
+                            player.sendMessage(ChatColor.GRAY + "warping you to " + warp.getName() + "...");
                         } else {
                             SMAPI.message().Error(new ErrorHandling().needToBePlayer(sender));
                         }
@@ -160,5 +170,54 @@ public class warpCMD implements CommandExecutor {
             SMAPI.message().Error(new ErrorHandling().missingPermission("servermanager.command.warp", sender));
         }
         return true;
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
+        List<String> arguments = new ArrayList<>();
+
+        HashMap<String, Object> argTree = new HashMap<>();
+
+        if (arguments.isEmpty()) {
+            arguments.add("create");
+            arguments.add("list");
+            arguments.add("top");
+            for (Object o : Warps.getWarpObjects().keySet()) {
+                HashMap<Object, Object> warp = (HashMap<Object, Object>) Warps.getWarpObjects().get(o);
+                arguments.add((String) warp.get("name"));
+            }
+        }
+
+        argTree.put("l1", arguments);
+
+        List<String> arguments2 = new ArrayList<>();
+        if (arguments2.isEmpty()) {
+            arguments2.add("info");
+            arguments2.add("delete");
+            arguments2.add("set");
+        }
+
+        argTree.put("l2", arguments2);
+
+        List<String> result = new ArrayList<>();
+        if (args.length == 1) {
+            for (String a : (List<String>) argTree.get("l1")) {
+                if (a.toLowerCase().startsWith(args[0].toLowerCase())) {
+                    result.add(a);
+                }
+            }
+            return result;
+        }
+
+        if (args.length == 2 && Warps.getWarpObjects().containsKey(args[0])) {
+            for (String a : (List<String>) argTree.get("l2")) {
+                if (a.toLowerCase().startsWith(args[1].toLowerCase())) {
+                    result.add(a);
+                }
+            }
+            return result;
+        }
+
+        return null;
     }
 }
